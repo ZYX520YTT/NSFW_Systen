@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="zhongfucheng.complain"/>
+    <bean id="complaindaoimpl" class="zhongfucheng.complain.dao.impl.ComplainDaoImpl" parent="baseDao"></bean>
+
+    <!-- 1、制定任务信息信息 -->
+    <bean id="jobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 设置执行对象 -->
+        <property name="targetObject" ref="complainServiceImpl"></property>
+        <!-- 设置执行对象中对应的执行方法 -->
+        <property name="targetMethod" value="doTask"></property>
+        <!-- 是否可以同步执行；不可同步执行 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+
+    <!-- 2、制定任务执行时机（任务执行触发器） -->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <!-- 设置任务详细 -->
+        <property name="jobDetail" ref="jobDetail1"></property>
+        <!-- 设置任务执行时机，cron表达式 -->
+        <property name="cronExpression" value="10 10 2 L * ?"></property>
+    </bean>
+
+    <!-- 3、设置调度工厂 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="role-action" extends="base-default" namespace="/role">
+        <action name="role_*" class="zhongfucheng.role.action.RoleAction" method="{1}">
+            <result name="{1}" >/WEB-INF/jsp/role/{1}.jsp</result>
+
+            <!--返回列表展示页面，重定向到列表展示-->
+            <result name="list" type="redirectAction">
+                <param name="actionName">role_listUI</param>
+            </result>
+        </action>
+    </package>
+
+</struts>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <!-- 禁用动态方法访问 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <!-- 配置成开发模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 配置拓展名为action -->
+    <constant name="struts.action.extention" value="action" />
+    <!-- 把主题配置成simple -->
+    <constant name="struts.ui.theme" value="simple" />
+
+
+    <!-- 配置全局结果及异常映射 -->
+    <package name="base-default" extends="struts-default">
+<!--        &lt;!&ndash; 返回结果类型 &ndash;&gt;
+        <result-types>
+            <result-type name="error" class="zhongfucheng.core.action.SysResultAction"></result-type>
+        </result-types>
+        &lt;!&ndash; 全局返回结果 &ndash;&gt;
+        <global-results>
+            <result name="error" type="error">/WEB-INF/jsp/error.jsp</result>
+            <result name="sysError">/WEB-INF/jsp/error.jsp</result>
+            <result name="input">/WEB-INF/jsp/error.jsp</result>
+        </global-results>
+        &lt;!&ndash; 全局异常映射 &ndash;&gt;
+        <global-exception-mappings>
+            <exception-mapping result="sysError" exception="zhongfucheng.core.action.SysResultAction"></exception-mapping>
+            <exception-mapping result="input" exception="java.lang.Exception"></exception-mapping>
+        </global-exception-mappings>-->
+    </package>
+
+
+    <!--测试模块-->
+<!--    <include file="zhongfucheng/test/config/test-Struts2.xml"/>-->
+    <!--User模块-->
+    <include file="zhongfucheng/user/config/user-struts.xml"/>
+    <!--Role模块-->
+    <include file="zhongfucheng/role/config/role-struts.xml"/>
+
+    <!--系统的home模块-->
+    <include file="zhongfucheng/home/config/home-struts2.xml"/>
+
+    <!--纳税服务home模块-->
+    <include file="zhongfucheng/nsfw/config/nsfwHome-struts.xml"/>
+
+    <!--登陆模块-->
+    <include file="zhongfucheng/login/config/login-struts.xml"/>
+
+    <!--信息发布管理模块-->
+    <include file="zhongfucheng/info/config/info-struts.xml"/>
+
+    <!--投诉管理模块-->
+    <include file="zhongfucheng/complain/config/complain-struts.xml"/>
+
+</struts>

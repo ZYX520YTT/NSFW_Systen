@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="zhongfucheng.complain.entity.ComplainReply" table="complain_reply">
+        <id name="replyId" type="java.lang.String">
+            <column name="reply_id" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <property name="replyer" column="replyer"/>
+        <property name="replyDept" column="reply_dept"/>
+        <property name="replyTime" column="reply_time"/>
+        <property name="replyContent" column="reply_content"/>
+
+        <many-to-one name="complain" class="zhongfucheng.complain.entity.Complain" fetch="select">
+            <column name="comp_id" length="32" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

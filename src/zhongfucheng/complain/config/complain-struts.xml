@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="complain-action" extends="json-default,base-default" namespace="/complain">
+        <action name="complain_*" class="zhongfucheng.complain.action.ComplainAction" method="{1}">
+            <result name="{1}" >/WEB-INF/jsp/complain/{1}.jsp</result>
+
+
+            <!--返回列表展示页面，重定向到列表展示-->
+            <result name="list" type="redirectAction">
+                <param name="actionName">complain_listUI</param>
+                <param name="complain.state">${state}</param>
+                <param name="complain.compTitle">${compTitle}</param>
+                <param name="endTime">${startTime}</param>
+                <param name="startTime">${startTime}</param>
+                <param name="encode">true</param>
+            </result>
+           <result type="json" name="getAnnualStatisticData">
+                <param name="root">map</param>
+            </result>
+        </action>
+    </package>
+
+</struts>

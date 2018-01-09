@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="info-action" extends="base-default" namespace="/info">
+        <action name="info_*" class="zhongfucheng.info.action.InfoAction" method="{1}">
+            <result name="{1}" >/WEB-INF/jsp/info/{1}.jsp</result>
+            <!--返回列表展示页面，重定向到列表展示-->
+            <result name="list" type="redirectAction">
+                <param name="actionName">info_listUI</param>
+
+                <!--重定向回去的时候，把查询条件带上-->
+                <param name="info.title">${selectCondition}</param>
+
+                <!--传输数据的时候需要编码-->
+                <param name="encode">true</param>
+
+            </result>
+        </action>
+    </package>
+
+</struts>

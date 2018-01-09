@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="zhongfucheng.role.entity.Role" table="role" >
+		<id name="roleId" type="java.lang.String" >
+			<column name="roleId" length="32" />
+			<generator class="uuid.hex" />
+		</id>
+		<property name="state" type="java.lang.String">
+			<column name="state" length="1" />
+		</property>
+		<property name="name" type="java.lang.String">
+			<column name="name" length="20" not-null="true" />
+		</property>
+		<!--
+			多方维护一方的数据，inverse设置为true，没有控制权限
+			设置级联保存更新，在保存角色的时候，将权限也保存起来了。
+			不设置懒加载，直接获取到权限的数据
+		-->
+		<set name="rolePrivilegeSet" lazy="false" inverse="true" cascade="save-update,delete">
+			<key>
+				<column name="role_id"/>
+			</key>
+			<one-to-many class="zhongfucheng.role.entity.RolePrivilege" ></one-to-many>
+		</set>
+	</class>
+
+</hibernate-mapping>
+	
