@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by ozc on 2017/6/2.
  */
 public class HomeAction extends BaseAction {
-    /****************提供getter方法，Struts2根据它自动转成JSON数据*********************/
+    /****************提供getter方法，Struts2根据它自动转成JSON数据**********************/
     private Map<String, Object> return_map;
 
 
